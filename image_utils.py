@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 from scipy.signal import convolve2d
 
-path = 'starry_night.jpg'
+path = 'brain-scan.jpg'
 
 def load_image(path):
     """
