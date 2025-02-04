@@ -3,7 +3,7 @@ import numpy as np
 from scipy.signal import convolve2d
 import matplotlib.pyplot as plt
 
-path = 'brain-scan.jpg'
+path = 'brain-scan.jpg'  # Change to absolute path if necessary
 
 def load_image(path):
     """Load an image and convert it to a numpy array."""
@@ -12,7 +12,7 @@ def load_image(path):
 
 def edge_detection(image):
     """Perform edge detection on an image using Sobel filters."""
-    gray_image = np.mean(image, axis=2)  # Convert to grayscale
+    gray_image = np.mean(image, axis=2).astype(np.float32)  # Convert to grayscale & float
     
     # Sobel kernels
     kernel_y = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])
@@ -26,19 +26,3 @@ def edge_detection(image):
     edgeMAG = np.sqrt(edge_x**2 + edge_y**2)
     
     return edgeMAG
-
-def show_image(image):
-    """Display an image using matplotlib."""
-    plt.imshow(image / np.max(image), cmap='gray')  # Normalize for better visualization
-    plt.axis('off')
-    plt.show()
-
-# Load image and perform edge detection
-try:
-    image = load_image(path)
-    edges = edge_detection(image)
-    show_image(edges)
-except FileNotFoundError:
-    print(f"Error: File '{path}' not found.")
-except Exception as e:
-    print(f"An error occurred: {e}")
